@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos casamos — Novia &amp; Novio</title>
+  <meta name="description" content="Página de la boda de Novia y Novio: fecha, lugar, galería y confirmación de asistencia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="hero" id="inicio">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Nos casamos</p>
+      <h1 class="hero-names">Novia <span class="amp">&amp;</span> Novio</h1>
+      <p class="hero-date">12 · 09 · 2026</p>
+      <p class="hero-place">Finca El Olivar, Sevilla</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#rsvp">Confirmar asistencia</a>
+        <a class="btn btn-ghost" href="#evento">Ver el evento</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="section" id="historia" aria-labelledby="historia-titulo">
+      <h2 id="historia-titulo">Nuestra historia</h2>
+      <ol class="timeline">
+        <li class="timeline-item">
+          <h3>Cómo nos conocimos</h3>
+          <p>Un café, una tarde de otoño y una conversación que no queríamos que terminara.</p>
+        </li>
+        <li class="timeline-item">
+          <h3>Nuestra primera aventura</h3>
+          <p>Viajamos juntos por primera vez y descubrimos que el mundo se ve mejor en compañía.</p>
+        </li>
+        <li class="timeline-item">
+          <h3>La propuesta</h3>
+          <p>Entre risas y alguna lágrima, llegó la pregunta. La respuesta fue un sí inmediato.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section section-alt" id="evento" aria-labelledby="evento-titulo">
+      <h2 id="evento-titulo">El gran día</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Ceremonia</h3>
+          <p class="card-time">18:00</p>
+          <p>Iglesia de Santa María<br>Plaza Mayor, 1<br>Sevilla</p>
+        </article>
+        <article class="card">
+          <h3>Celebración</h3>
+          <p class="card-time">20:00</p>
+          <p>Finca El Olivar<br>Carretera de la Finca, s/n<br>Sevilla</p>
+        </article>
+        <article class="card">
+          <h3>Código de vestimenta</h3>
+          <p class="card-time">Elegante</p>
+          <p>Nos encantaría veros guapos y cómodos para bailar hasta el amanecer.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="galeria" aria-labelledby="galeria-titulo">
+      <h2 id="galeria-titulo">Momentos</h2>
+      <ul class="gallery" role="list">
+        <li class="gallery-item g1"><span>Nuestro primer viaje</span></li>
+        <li class="gallery-item g2"><span>La propuesta</span></li>
+        <li class="gallery-item g3"><span>Juntos</span></li>
+        <li class="gallery-item g4"><span>El día de la foto</span></li>
+        <li class="gallery-item g5"><span>Sonrisas</span></li>
+        <li class="gallery-item g6"><span>Recuerdos</span></li>
+      </ul>
+    </section>
+
+    <section class="section section-alt" id="rsvp" aria-labelledby="rsvp-titulo">
+      <h2 id="rsvp-titulo">Confirma tu asistencia</h2>
+      <p class="section-lead">Nos hace mucha ilusión celebrar este día contigo. Confírmanos antes del 1 de junio de 2026.</p>
+      <form class="rsvp-form" action="#" method="post">
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <fieldset class="field">
+          <legend>¿Asistirás?</legend>
+          <label class="radio"><input type="radio" name="asistencia" value="si" required> Sí, allí estaré</label>
+          <label class="radio"><input type="radio" name="asistencia" value="no"> No podré asistir</label>
+        </fieldset>
+        <div class="field">
+          <label for="invitados">Número de acompañantes</label>
+          <input type="number" id="invitados" name="invitados" min="0" max="10" value="0">
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje para los novios (alergias, mensajes...)</label>
+          <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Enviar confirmación</button>
+      </form>
+    </section>
+
+    <section class="section" id="regalos" aria-labelledby="regalos-titulo">
+      <h2 id="regalos-titulo">Lista de regalos</h2>
+      <p class="section-lead">Tu presencia es nuestro mejor regalo. Si aun así quieres contribuir, aquí tienes nuestra lista:</p>
+      <a class="btn btn-ghost" href="#regalos">Ver lista de regalos</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Novia &amp; Novio · 12 de septiembre de 2026 · #NoviaYNovio2026</p>
+    <p><a href="#inicio">Volver arriba</a></p>
+  </footer>
+</body>
+</html>
