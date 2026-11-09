@@ -402,6 +402,42 @@ textarea:focus-visible {
   color: var(--ink-soft);
 }
 
+.card-link {
+  margin: 0.75rem 0 1rem;
+}
+
+.card-link a {
+  color: var(--accent);
+  font-weight: 400;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.card-link a:hover {
+  color: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.card-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.card-photos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease;
+}
+
+.card-photos img:hover {
+  transform: scale(1.04);
+}
+
 /* ---------- Galería ---------- */
 
 .gallery {
