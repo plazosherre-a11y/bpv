@@ -77,6 +77,84 @@ html {
   border-color: var(--accent);
 }
 
+.nav-cta {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff !important;
+  padding: 0.45rem 1.1rem !important;
+  border-radius: 999px;
+  border-bottom: none !important;
+  font-weight: 400;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -8px rgba(143, 74, 41, 0.8);
+  color: #fff !important;
+}
+
+/* ---------- Preguntas frecuentes ---------- */
+
+.faq {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: left;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.faq details {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.4rem;
+  box-shadow: var(--shadow);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.05rem;
+  list-style: none;
+  position: relative;
+  padding-right: 1.6rem;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--accent);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  transition: transform 0.25s ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq details p {
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+}
+
+/* ---------- Contacto ---------- */
+
+.contact-line {
+  margin: 0.4rem 0;
+  font-size: 1.1rem;
+}
+
+.contact-line a {
+  color: var(--accent);
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -677,15 +755,19 @@ textarea:focus-visible {
   }
 
   .nav-links {
-    gap: 0.8rem;
+    gap: 0.55rem;
   }
 
   .nav-links a {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
+  }
+
+  .nav-cta {
+    padding: 0.35rem 0.8rem !important;
   }
 
   html {
-    scroll-padding-top: 96px;
+    scroll-padding-top: 110px;
   }
 
   .gallery {
