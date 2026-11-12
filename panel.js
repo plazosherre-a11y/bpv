@@ -170,6 +170,8 @@ function bloqueHtml(b, i) {
     case "localizacion": {
       const mapaC = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(f.ceremoniaLugar || "");
       const mapaF = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(f.celebracionLugar || "");
+      const embedC = "https://maps.google.com/maps?q=" + encodeURIComponent(f.ceremoniaLugar || "") + "&output=embed";
+      const embedF = "https://maps.google.com/maps?q=" + encodeURIComponent(f.celebracionLugar || "") + "&output=embed";
       return `<section class="section section-alt" id="${id}">
       <h2>${escapar(f.titulo)}</h2>
       <div class="cards">
@@ -177,21 +179,17 @@ function bloqueHtml(b, i) {
           <h3>Ceremonia</h3>
           <p class="card-time">${escapar(f.ceremoniaHora)}</p>
           <p>${escapar(f.ceremoniaLugar)}</p>
+          <iframe class="map-thumb" src="${embedC}" loading="lazy" title="Mapa de la ceremonia"></iframe>
           <p class="card-link"><a href="${mapaC}" target="_blank" rel="noopener">Ver en el mapa</a></p>
-          <div class="card-photos">
-            <img src="fotos/ceremonia-1.jpg" alt="Foto de la ceremonia" loading="lazy" width="600" height="450">
-            <img src="fotos/ceremonia-2.jpg" alt="Foto del lugar de la ceremonia" loading="lazy" width="600" height="450">
-          </div>
+          <img class="card-photo" src="fotos/ceremonia.jpg" alt="Foto de la Iglesia Catedral Castrense" loading="lazy" width="600" height="400">
         </article>
         <article class="card">
           <h3>Celebración</h3>
           <p class="card-time">${escapar(f.celebracionHora)}</p>
           <p>${escapar(f.celebracionLugar)}</p>
+          <iframe class="map-thumb" src="${embedF}" loading="lazy" title="Mapa de la celebración"></iframe>
           <p class="card-link"><a href="${mapaF}" target="_blank" rel="noopener">Ver en el mapa</a></p>
-          <div class="card-photos">
-            <img src="fotos/celebracion-1.jpg" alt="Foto de la celebración" loading="lazy" width="600" height="450">
-            <img src="fotos/celebracion-2.jpg" alt="Foto del lugar de la celebración" loading="lazy" width="600" height="450">
-          </div>
+          <img class="card-photo" src="fotos/celebracion.jpg" alt="Foto de Finca Prados Moros" loading="lazy" width="600" height="400">
         </article>
       </div>
     </section>`;

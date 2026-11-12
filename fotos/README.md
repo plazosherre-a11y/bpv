@@ -13,10 +13,10 @@ Coloca aquí las imágenes. La web espera estos nombres exactos:
 
 ## Fotos de los lugares (tarjetas "El gran día")
 
-- `fotos/ceremonia-1.jpg` → exterior de la Iglesia Catedral Castrense
-- `fotos/ceremonia-2.jpg` → interior de la Iglesia Catedral Castrense
-- `fotos/celebracion-1.jpg` → exterior de Finca Prados Moros
-- `fotos/celebracion-2.jpg` → jardín o salón de Finca Prados Moros
+- `fotos/ceremonia.jpg` → foto de la Iglesia Catedral Castrense
+
+- `fotos/celebracion.jpg` → foto de Finca Prados Moros
+
 
 ## Recomendaciones
 
