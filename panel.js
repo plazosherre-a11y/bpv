@@ -1,6 +1,6 @@
 const TIPOS = {
   portada: {
-    nombre: "Portada",
+    nombre: "Inicio (portada)",
     campos: [["nombre1", "Nombre 1"], ["nombre2", "Nombre 2"], ["fecha", "Fecha"], ["lugares", "Lugares"]]
   },
   texto: {
@@ -13,7 +13,7 @@ const TIPOS = {
     campos: [["titulo", "Título (Ceremonia / Celebración)"], ["hora", "Hora"], ["nombre", "Nombre del lugar"], ["fotos", "Fotos (archivos separados por coma)"]]
   },
   preguntas: {
-    nombre: "Preguntas frecuentes",
+    nombre: "Preguntas",
     campos: [["titulo", "Título"], ["items", "Una por línea: pregunta | respuesta"]]
   },
   localizacion: {
@@ -31,7 +31,7 @@ const TIPOS = {
     campos: [["titulo", "Título"], ["texto", "Texto"], ["enlace", "Enlace (URL)"]]
   },
   protocolo: {
-    nombre: "Protocolo y dress code",
+    nombre: "Normas de protocolo",
     campos: [
       ["titulo", "Título"],
       ["mujeres", "Dress code mujeres"],
@@ -40,7 +40,7 @@ const TIPOS = {
     ]
   },
   formulario: {
-    nombre: "Formulario de asistencia",
+    nombre: "Confirma tu asistencia",
     campos: [["titulo", "Título"], ["texto", "Texto introductorio"]]
   },
   contacto: {
