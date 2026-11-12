@@ -360,7 +360,13 @@ const PUBLICAR_PY = [
   'run(["git", "-C", str(DEST), "add", "-A"])',
   'subprocess.run(["git", "-C", str(DEST), "-c", "user.name=Panel Boda", "-c", "user.email=panel@localhost", "commit", "-m", "Actualizar web desde el panel"], check=False)',
   'run(["git", "-C", str(DEST), "push", "origin", "HEAD"])',
-  'print("==> Publicado en GitHub Pages (tarda 1-2 minutos en verse).")'
+  'print("==> Publicado en GitHub Pages (tarda 1-2 minutos en verse).")',
+  "",
+  "for nombre in [\"index.html\", \"datos.json\"]:",
+  "    f = AQUI / nombre",
+  "    if f.is_file():",
+  "        f.unlink()",
+  '        print(f"==> Borrado {nombre} de la carpeta local (ya publicado).")' 
 ].join("\n") + "\n";
 
 document.getElementById("desc-html").addEventListener("click", () =>
