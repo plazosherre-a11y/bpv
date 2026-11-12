@@ -44,6 +44,8 @@ const CAMPOS_COLOR = [
   ["ink", "Color del texto"]
 ];
 
+const BASE = location.href.replace(/[^/]*$/, "");
+
 let datos = { textos: {}, colores: {} };
 let bloques = [];
 
@@ -79,7 +81,9 @@ function porDefecto() {
 
 function navHtml() {
   const enlaces = bloques
-    .map((b, i) => `<li><a href="#sec${i + 1}">${escapar(b.campos.titulo || TIPOS[b.tipo].nombre)}</a></li>`)
+    .map((b, i) => ({ b, i }))
+    .filter(({ b }) => b.tipo !== "portada")
+    .map(({ b, i }) => `<li><a href="#sec${i + 1}">${escapar(b.campos.titulo || TIPOS[b.tipo].nombre)}</a></li>`)
     .join("");
   return `<nav class="topnav" aria-label="Navegación principal">
     <div class="nav-inner">
@@ -104,7 +108,7 @@ function bloqueHtml(b, i) {
       return `<section class="section" id="${id}"><h2>${escapar(f.titulo)}</h2><p class="lead">${escapar(f.cuerpo)}</p></section>`;
     case "galeria": {
       const fotos = [1, 2, 3, 4, 5, 6]
-        .map((n) => `<li class="gallery-item"><img src="fotos/momento-${n}.jpg" alt="Foto ${n} de la pareja" loading="lazy" width="600" height="600"></li>`)
+        .map((n) => `<li class="gallery-item"><img src="fotos/momento-${n}.jpg" alt="Foto ${n} de la pareja" loading="lazy" width="600" height="600"><span>Momento ${n}</span></li>`)
         .join("");
       return `<section class="section" id="${id}"><h2>${escapar(f.titulo)}</h2><ul class="gallery" role="list">${fotos}</ul></section>`;
     }
@@ -150,17 +154,18 @@ function bloqueHtml(b, i) {
   return "";
 }
 
-function documentoHtml() {
+function documentoHtml(modoVistaPrevia) {
   const cuerpo = bloques.map((b, i) => bloqueHtml(b, i)).join("\n");
   const marca = datos.textos.marca || "Nuestra boda";
   const fecha = datos.textos.fechaLarga || "";
   const vars = Object.entries(datos.colores || {}).map(([k, v]) => `--${k}:${v};`).join("");
+  const baseTag = modoVistaPrevia ? `  <base href="${BASE}">\n` : "";
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapar(marca)}</title>
+${baseTag}  <title>${escapar(marca)}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -276,7 +281,7 @@ let temporizador = null;
 function actualizarVista() {
   clearTimeout(temporizador);
   temporizador = setTimeout(() => {
-    document.getElementById("vista").srcdoc = documentoHtml();
+    document.getElementById("vista").srcdoc = documentoHtml(true);
   }, 250);
 }
 
@@ -321,7 +326,7 @@ const PUBLICAR_PY = [
 ].join("\n") + "\n";
 
 document.getElementById("desc-html").addEventListener("click", () =>
-  descargar("index.html", documentoHtml(), "text/html"));
+  descargar("index.html", documentoHtml(false), "text/html"));
 document.getElementById("desc-json").addEventListener("click", () =>
   descargar("datos.json", JSON.stringify(datos, null, 2), "application/json"));
 document.getElementById("desc-script").addEventListener("click", () =>
