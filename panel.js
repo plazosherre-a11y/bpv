@@ -16,6 +16,15 @@ const TIPOS = {
     nombre: "Preguntas frecuentes",
     campos: [["titulo", "Título"], ["items", "Una por línea: pregunta | respuesta"]]
   },
+  protocolo: {
+    nombre: "Protocolo y dress code",
+    campos: [
+      ["titulo", "Título"],
+      ["mujeres", "Dress code mujeres"],
+      ["hombres", "Dress code hombres"],
+      ["normas", "Normas de comportamiento (una por línea)"]
+    ]
+  },
   formulario: {
     nombre: "Formulario de asistencia",
     campos: [["titulo", "Título"], ["texto", "Texto introductorio"]]
@@ -82,6 +91,7 @@ function porDefecto() {
     { tipo: "galeria", campos: { titulo: "Nosotros" } },
     { tipo: "lugar", campos: { titulo: "Ceremonia", hora: t.horaCeremonia || "", nombre: t.lugarCeremonia || "", fotos: "fotos/ceremonia-1.jpg, fotos/ceremonia-2.jpg" } },
     { tipo: "lugar", campos: { titulo: "Celebración", hora: t.horaCelebracion || "", nombre: t.lugarCelebracion || "", fotos: "fotos/celebracion-1.jpg, fotos/celebracion-2.jpg" } },
+    { tipo: "protocolo", campos: { titulo: "Protocolo y dress code", mujeres: "Vestido largo o de cóctel. Evitar el blanco (reservado a la novia).", hombres: "Traje oscuro; corbata opcional.", normas: "Llegad con 15 minutos de antelación a cada acto.\nConfirmad vuestra asistencia antes de mayo de 2027.\nSi tenéis cualquier duda, escribidnos por el apartado de contacto." } },
     { tipo: "preguntas", campos: { titulo: "Preguntas frecuentes", items: "¿Dónde aparco? | Habrá parking habilitado.\n¿Hay transporte entre los lugares? | Sí, habrá autobuses.\n¿Puedo llevar niños? | ¡Por supuesto!" } },
     { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "" } },
     { tipo: "contacto", campos: { titulo: "Contacto", email1: t.emailVictoria || "", email2: t.emailPedro || "" } }
@@ -142,6 +152,21 @@ function bloqueHtml(b, i) {
         }).join("");
       return `<section class="section" id="${id}"><h2>${escapar(f.titulo)}</h2><div class="faq">${items}</div></section>`;
     }
+    case "protocolo": {
+      const normas = String(f.normas || "").split("\n").map((l) => l.trim()).filter(Boolean)
+        .map((l) => `<li>${escapar(l)}</li>`).join("");
+      return `<section class="section section-alt" id="${id}">
+      <h2>${escapar(f.titulo)}</h2>
+      <div class="cards">
+        <article class="card"><h3>Mujeres</h3><p>${escapar(f.mujeres)}</p></article>
+        <article class="card"><h3>Hombres</h3><p>${escapar(f.hombres)}</p></article>
+      </div>
+      <div class="card" style="margin-top:1.5rem;text-align:left;">
+        <h3>Normas de comportamiento</h3>
+        <ul style="margin:0;padding-left:1.2rem;">${normas}</ul>
+      </div>
+    </section>`;
+    }
     case "formulario":
       return `<section class="section section-alt" id="rsvp"><h2>${escapar(f.titulo)}</h2>
       <p class="lead">${escapar(f.texto)}</p>
@@ -152,7 +177,10 @@ function bloqueHtml(b, i) {
           <label class="radio"><input type="radio" name="asistencia" value="si" required> Sí, allí estaré</label>
           <label class="radio"><input type="radio" name="asistencia" value="no"> No podré asistir</label>
         </fieldset>
-        <div class="field"><label for="mensaje">Mensaje para los novios</label><textarea id="mensaje" name="mensaje" rows="4"></textarea></div>
+        <div class="field"><label for="invitados">Número de acompañantes</label><input type="number" id="invitados" name="invitados" min="0" max="10" value="0"></div>
+        <div class="field"><label for="alergias">Alergias alimentarias</label><input type="text" id="alergias" name="alergias" placeholder="Ninguna / intolerancia a..."></div>
+        <div class="field"><label for="necesidades">Necesidades especiales (movilidad, dieta...)</label><textarea id="necesidades" name="necesidades" rows="3"></textarea></div>
+        <div class="field"><label for="mensaje">Mensaje para los novios</label><textarea id="mensaje" name="mensaje" rows="3"></textarea></div>
         <button class="btn btn-primary" type="submit">Enviar confirmación</button>
       </form></section>`;
     case "contacto":
