@@ -27,8 +27,6 @@ body {
   font-weight: 300;
   color: var(--ink);
   background-color: var(--bg);
-  background-image: url("fondo.svg");
-  background-repeat: repeat;
   line-height: 1.65;
 }
 
@@ -125,8 +123,10 @@ body {
   gap: 0.6rem;
   text-align: center;
   padding: 6rem 1.5rem 3rem;
-  background-image: url("fondo.svg"), linear-gradient(180deg, #dcebfb 0%, var(--bg) 75%);
-  background-repeat: repeat, no-repeat;
+  background-image: linear-gradient(rgba(229, 242, 255, 0.25), rgba(229, 242, 255, 0.55)), url("fondo.png");
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
 }
 
 .hero-date {

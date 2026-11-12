@@ -13,7 +13,7 @@ Web estática (HTML/CSS/JS) publicada con GitHub Pages.
 | `styles.css` | Estilos (responsive, menú fijo) |
 | `site.js` | Aplica `datos.json` a la web |
 | `datos.json` | Textos, colores y tipografías editables |
-| `fondo.svg` | Patrón de fondo |
+| `fondo.png` | Imagen de fondo (barco sobre rayas azules) |
 | `fotos/` | Imágenes (ver `fotos/README.md`) |
 | `panel.html` + `panel.js` | Editor visual (bloques + colores/fuentes), protegido con contraseña |
 | `abrir-web.py` | Script local: descarga la web al Escritorio y la abre |
