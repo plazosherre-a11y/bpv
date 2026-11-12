@@ -49,18 +49,6 @@ const TIPOS = {
   }
 };
 
-const CAMPOS_TEXTO = [
-  ["titulo", "Título de la pestaña"], ["marca", "Nombre en el menú y pie"],
-  ["nombre1", "Nombre 1"], ["nombre2", "Nombre 2"],
-  ["fecha", "Fecha en la portada"], ["fechaLarga", "Fecha en el pie"],
-  ["hashtag", "Hashtag"], ["lugaresHero", "Lugares en la portada"],
-  ["lugarCeremonia", "Lugar de la ceremonia"], ["horaCeremonia", "Hora de la ceremonia"],
-  ["lugarCelebracion", "Lugar de la celebración"], ["horaCelebracion", "Hora de la celebración"],
-  ["dresscode", "Código de vestimenta"], ["textoDresscode", "Texto de código de vestimenta"],
-  ["textoNosotros", "Texto de 'Nosotros'"], ["textoRsvp", "Texto de 'Confirma tu asistencia'"],
-  ["emailVictoria", "Email de contacto 1"], ["emailPedro", "Email de contacto 2"]
-];
-
 const CAMPOS_COLOR = [
   ["bg", "Fondo principal"], ["bg-alt", "Fondo de secciones alternas"],
   ["accent", "Color de acento (botones y enlaces)"], ["accent-dark", "Acento oscuro (hover)"],
