@@ -16,6 +16,20 @@ const TIPOS = {
     nombre: "Preguntas frecuentes",
     campos: [["titulo", "Título"], ["items", "Una por línea: pregunta | respuesta"]]
   },
+  localizacion: {
+    nombre: "Localización y horarios",
+    campos: [
+      ["titulo", "Título"],
+      ["ceremoniaLugar", "Lugar de la ceremonia"],
+      ["ceremoniaHora", "Hora de la ceremonia"],
+      ["celebracionLugar", "Lugar de la celebración"],
+      ["celebracionHora", "Hora de la celebración"]
+    ]
+  },
+  lista: {
+    nombre: "Lista de bodas",
+    campos: [["titulo", "Título"], ["texto", "Texto"], ["enlace", "Enlace (URL)"]]
+  },
   protocolo: {
     nombre: "Protocolo y dress code",
     campos: [
@@ -88,13 +102,12 @@ function porDefecto() {
   const t = datos.textos || {};
   return [
     { tipo: "portada", campos: { nombre1: t.nombre1 || "Victoria", nombre2: t.nombre2 || "Pedro", fecha: t.fecha || "", lugares: t.lugaresHero || "" } },
-    { tipo: "galeria", campos: { titulo: "Nosotros" } },
-    { tipo: "lugar", campos: { titulo: "Ceremonia", hora: t.horaCeremonia || "", nombre: t.lugarCeremonia || "", fotos: "fotos/ceremonia-1.jpg, fotos/ceremonia-2.jpg" } },
-    { tipo: "lugar", campos: { titulo: "Celebración", hora: t.horaCelebracion || "", nombre: t.lugarCelebracion || "", fotos: "fotos/celebracion-1.jpg, fotos/celebracion-2.jpg" } },
-    { tipo: "protocolo", campos: { titulo: "Protocolo y dress code", mujeres: "Vestido largo o de cóctel. Evitar el blanco (reservado a la novia).", hombres: "Traje oscuro; corbata opcional.", normas: "Llegad con 15 minutos de antelación a cada acto.\nConfirmad vuestra asistencia antes de mayo de 2027.\nSi tenéis cualquier duda, escribidnos por el apartado de contacto." } },
-    { tipo: "preguntas", campos: { titulo: "Preguntas frecuentes", items: "¿Dónde aparco? | Habrá parking habilitado.\n¿Hay transporte entre los lugares? | Sí, habrá autobuses.\n¿Puedo llevar niños? | ¡Por supuesto!" } },
-    { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "" } },
-    { tipo: "contacto", campos: { titulo: "Contacto", email1: t.emailVictoria || "", email2: t.emailPedro || "" } }
+    { tipo: "localizacion", campos: { titulo: "Localización y horarios", ceremoniaLugar: t.lugarCeremonia || "", ceremoniaHora: t.horaCeremonia || "", celebracionLugar: t.lugarCelebracion || "", celebracionHora: t.horaCelebracion || "" } },
+    { tipo: "protocolo", campos: { titulo: "Normas de protocolo", mujeres: "Vestido largo o de cóctel. Evitar el blanco (reservado a la novia).", hombres: "Traje oscuro; corbata opcional.", normas: "Llegad con 15 minutos de antelación a cada acto.\nConfirmad vuestra asistencia antes de mayo de 2027.\nSi tenéis cualquier duda, escribidnos por el apartado de contacto." } },
+    { tipo: "lista", campos: { titulo: "Lista de bodas", texto: "Vuestra presencia es nuestro mejor regalo. Si aun así queréis contribuir, aquí tenéis nuestra lista:", enlace: "#" } },
+    { tipo: "preguntas", campos: { titulo: "Preguntas", items: "¿Dónde aparco? | Habrá parking habilitado.\n¿Hay transporte entre los lugares? | Sí, habrá autobuses.\n¿Puedo llevar niños? | ¡Por supuesto!" } },
+    { tipo: "contacto", campos: { titulo: "Contacto", email1: t.emailVictoria || "", email2: t.emailPedro || "" } },
+    { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "" } }
   ];
 }
 
@@ -121,7 +134,7 @@ function bloqueHtml(b, i) {
     <p class="hero-date">${escapar(f.fecha)}</p>
     <h1 class="hero-names">${escapar(f.nombre1)} <span class="amp">&amp;</span> ${escapar(f.nombre2)}</h1>
     <p class="hero-place">${escapar(f.lugares)}</p>
-    <a class="btn btn-primary" href="#rsvp">Confirma asistencia</a>
+    <a class="btn btn-primary" href="#rsvp">Confirma tu asistencia</a>
   </header>`;
     case "texto":
       return `<section class="section" id="${id}"><h2>${escapar(f.titulo)}</h2><p class="lead">${escapar(f.cuerpo)}</p></section>`;
@@ -152,6 +165,41 @@ function bloqueHtml(b, i) {
         }).join("");
       return `<section class="section" id="${id}"><h2>${escapar(f.titulo)}</h2><div class="faq">${items}</div></section>`;
     }
+    case "localizacion": {
+      const mapaC = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(f.ceremoniaLugar || "");
+      const mapaF = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(f.celebracionLugar || "");
+      return `<section class="section section-alt" id="${id}">
+      <h2>${escapar(f.titulo)}</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Ceremonia</h3>
+          <p class="card-time">${escapar(f.ceremoniaHora)}</p>
+          <p>${escapar(f.ceremoniaLugar)}</p>
+          <p class="card-link"><a href="${mapaC}" target="_blank" rel="noopener">Ver en el mapa</a></p>
+          <div class="card-photos">
+            <img src="fotos/ceremonia-1.jpg" alt="Foto de la ceremonia" loading="lazy" width="600" height="450">
+            <img src="fotos/ceremonia-2.jpg" alt="Foto del lugar de la ceremonia" loading="lazy" width="600" height="450">
+          </div>
+        </article>
+        <article class="card">
+          <h3>Celebración</h3>
+          <p class="card-time">${escapar(f.celebracionHora)}</p>
+          <p>${escapar(f.celebracionLugar)}</p>
+          <p class="card-link"><a href="${mapaF}" target="_blank" rel="noopener">Ver en el mapa</a></p>
+          <div class="card-photos">
+            <img src="fotos/celebracion-1.jpg" alt="Foto de la celebración" loading="lazy" width="600" height="450">
+            <img src="fotos/celebracion-2.jpg" alt="Foto del lugar de la celebración" loading="lazy" width="600" height="450">
+          </div>
+        </article>
+      </div>
+    </section>`;
+    }
+    case "lista":
+      return `<section class="section section-alt" id="${id}">
+      <h2>${escapar(f.titulo)}</h2>
+      <p class="lead">${escapar(f.texto)}</p>
+      <a class="btn btn-ghost" href="${escapar(f.enlace || "#")}">Ver lista de boda</a>
+    </section>`;
     case "protocolo": {
       const normas = String(f.normas || "").split("\n").map((l) => l.trim()).filter(Boolean)
         .map((l) => `<li>${escapar(l)}</li>`).join("");
@@ -219,7 +267,7 @@ ${cuerpo}
   </main>
   <footer class="footer">
     <p>${escapar(marca)}${fecha ? " · " + escapar(fecha) : ""}${datos.textos.hashtag ? " · " + escapar(datos.textos.hashtag) : ""}</p>
-    <p><a href="#inicio">Volver arriba</a></p>
+    <p><a href="#inicio">Volver arriba</a> · <a href="panel.html">Panel de edición</a></p>
   </footer>
 </body>
 </html>

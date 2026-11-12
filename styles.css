@@ -210,8 +210,7 @@ summary:focus-visible {
 
 .section-alt {
   max-width: none;
-  background: var(--bg-alt);
-  background: color-mix(in srgb, var(--bg-alt) 88%, transparent);
+  background: transparent;
 }
 
 .section-alt > * {
