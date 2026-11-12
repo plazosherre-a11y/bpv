@@ -55,8 +55,6 @@ function fuentesUrl(f) {
   return "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":wght@400;600;700&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
 }
 
-const BASE = location.href.replace(/[^/]*$/, "");
-
 let datos = { textos: {}, colores: {} };
 let bloques = [];
 
@@ -165,7 +163,7 @@ function bloqueHtml(b, i) {
   return "";
 }
 
-function documentoHtml(modoVistaPrevia) {
+function documentoHtml() {
   const cuerpo = bloques.map((b, i) => bloqueHtml(b, i)).join("\n");
   const marca = datos.textos.marca || "Nuestra boda";
   const fecha = datos.textos.fechaLarga || "";
@@ -173,13 +171,12 @@ function documentoHtml(modoVistaPrevia) {
   const fontsHref = fuentesUrl(fuentes);
   const vars = Object.entries(datos.colores || {}).map(([k, v]) => `--${k}:${v};`).join("") +
     `--font-display:"${fuentes.display}",Georgia,serif;--font-body:"${fuentes.body}",system-ui,sans-serif;`;
-  const baseTag = modoVistaPrevia ? `  <base href="${BASE}">\n` : "";
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-${baseTag}  <title>${escapar(marca)}</title>
+  <title>${escapar(marca)}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="${fontsHref}" rel="stylesheet">
@@ -331,16 +328,8 @@ let temporizador = null;
 function actualizarVista() {
   clearTimeout(temporizador);
   temporizador = setTimeout(() => {
-    const html = documentoHtml(true);
-    const vista = document.getElementById("vista");
     try {
-      vista.srcdoc = html;
-      const doc = vista.contentDocument || (vista.contentWindow && vista.contentWindow.document);
-      if (doc) {
-        doc.open();
-        doc.write(html);
-        doc.close();
-      }
+      document.getElementById("vista").srcdoc = documentoHtml();
       reportarEstado("");
     } catch (e) {
       reportarEstado("Error en la vista previa: " + e.message);
@@ -389,7 +378,7 @@ const PUBLICAR_PY = [
 ].join("\n") + "\n";
 
 document.getElementById("desc-html").addEventListener("click", () =>
-  descargar("index.html", documentoHtml(false), "text/html"));
+  descargar("index.html", documentoHtml(), "text/html"));
 document.getElementById("desc-json").addEventListener("click", () =>
   descargar("datos.json", JSON.stringify(datos, null, 2), "application/json"));
 document.getElementById("desc-script").addEventListener("click", () =>
