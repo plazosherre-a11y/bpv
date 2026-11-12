@@ -7,13 +7,15 @@
   <style>
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
+    html, body { height: 100%; }
     body {
       margin: 0;
       font-family: "Segoe UI", system-ui, sans-serif;
       display: grid;
-      grid-template-columns: 400px 1fr;
-      grid-template-rows: auto 1fr;
+      grid-template-columns: 400px minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr);
       height: 100vh;
+      height: 100svh;
       background: #ece7df;
       color: #2f2a24;
     }
@@ -53,6 +55,7 @@
     .gate .aviso { font-size: 0.72rem; color: #9a8d7d; }
     header {
       grid-column: 1 / -1;
+      grid-row: 1;
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -66,7 +69,15 @@
       border-radius: 999px; border: 1px solid #a05c3b; background: #fff; color: #a05c3b; cursor: pointer;
     }
     .pestana.activa { background: #a05c3b; color: #fff; }
-    aside { overflow-y: auto; padding: 1.2rem; background: #fff; border-right: 1px solid #ddd3c4; }
+    aside {
+      grid-column: 1;
+      grid-row: 2;
+      overflow-y: auto;
+      min-height: 0;
+      padding: 1.2rem;
+      background: #fff;
+      border-right: 1px solid #ddd3c4;
+    }
     aside p.nota { font-size: 0.8rem; color: #6e6357; margin: 0 0 1rem; }
     .paleta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
     .paleta button {
@@ -98,13 +109,22 @@
     .acciones button { font: inherit; font-size: 0.88rem; padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid #a05c3b; cursor: pointer; }
     .primario { background: #a05c3b; color: #fff; }
     .secundario { background: #fff; color: #a05c3b; }
-    main { padding: 0; display: flex; flex-direction: column; }
+    main {
+      grid-column: 2;
+      grid-row: 2;
+      min-width: 0;
+      min-height: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
     #estado { font-size: 0.75rem; color: #b03a2e; padding: 0.3rem 0.8rem; background: #fff; border-bottom: 1px solid #ddd3c4; min-height: 1.2em; }
-    iframe { width: 100%; flex: 1; border: 0; background: #fff; }
+    iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: #fff; }
     @media (max-width: 800px) {
-      body { grid-template-columns: 1fr; grid-template-rows: auto 45vh 55vh; }
-      aside { grid-row: 2; }
-      main { grid-row: 3; }
+      body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 45vh) minmax(0, 55vh); }
+      header { grid-column: 1; grid-row: 1; }
+      aside { grid-column: 1; grid-row: 2; border-right: 0; border-bottom: 1px solid #ddd3c4; }
+      main { grid-column: 1; grid-row: 3; }
     }
   </style>
 </head>
