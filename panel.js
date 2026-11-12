@@ -346,4 +346,27 @@ function activarPestana( cual ) {
 pestBloques.addEventListener("click", () => activarPestana("bloques"));
 pestDatos.addEventListener("click", () => activarPestana("datos"));
 
-cargar();
+const USUARIOS = ["pedro", "victoria"];
+const CLAVE = atob("Q2FkaXotMjE=");
+
+function iniciar() {
+  document.getElementById("gate").hidden = true;
+  document.getElementById("app").hidden = false;
+  cargar();
+}
+
+if (sessionStorage.getItem("bpv-panel-ok") === "1") {
+  iniciar();
+} else {
+  document.getElementById("login").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const u = document.getElementById("usuario").value.trim().toLowerCase();
+    const c = document.getElementById("clave").value;
+    if (USUARIOS.includes(u) && c === CLAVE) {
+      sessionStorage.setItem("bpv-panel-ok", "1");
+      iniciar();
+    } else {
+      document.getElementById("error").hidden = false;
+    }
+  });
+}

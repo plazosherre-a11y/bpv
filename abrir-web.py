@@ -61,7 +61,9 @@ def main() -> int:
     DESKTOP.mkdir(parents=True, exist_ok=True)
     asegurar_repositorio()
 
-    index = DEST / "index.html"
+    index = DEST / "web.html"
+    if not index.is_file():
+        index = DEST / "index.html"
     if not index.is_file():
         print(f"ERROR: no se encuentra {index}", file=sys.stderr)
         return 1
