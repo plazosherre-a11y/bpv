@@ -125,7 +125,7 @@ body {
   gap: 0.6rem;
   text-align: center;
   padding: 6rem 1.5rem 3rem;
-  background-image: url("fondo.svg"), linear-gradient(180deg, #d8e9f7 0%, var(--bg) 75%);
+  background-image: url("fondo.svg"), linear-gradient(180deg, #dcebfb 0%, var(--bg) 75%);
   background-repeat: repeat, no-repeat;
 }
 
