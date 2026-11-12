@@ -67,15 +67,17 @@ const CAMPOS_COLOR = [
   ["ink", "Color del texto"]
 ];
 
-const FUENTES_TITULAR = ["Cormorant Garamond", "Playfair Display", "Great Vibes", "Dancing Script"];
+const FUENTES_TITULAR = ["Pinyon Script", "Cormorant Garamond", "Playfair Display", "Great Vibes", "Dancing Script"];
 const FUENTES_TEXTO = ["Jost", "Lato", "Montserrat", "Open Sans"];
+const FUENTES_SCRIPT = ["Pinyon Script", "Great Vibes", "Dancing Script"];
 
 function fam(f) {
   return encodeURIComponent(f).replace(/%20/g, "+");
 }
 
 function fuentesUrl(f) {
-  return "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":wght@400;600;700&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
+  const pesoDisplay = FUENTES_SCRIPT.includes(f.display) ? "wght@400" : "wght@400;600;700";
+  return "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":" + pesoDisplay + "&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
 }
 
 let datos = { textos: {}, colores: {} };

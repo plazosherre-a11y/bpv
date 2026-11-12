@@ -21,9 +21,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (datos.fuentes) {
     const f = datos.fuentes;
     const fam = (s) => encodeURIComponent(s).replace(/%20/g, "+");
+    const esScript = ["Pinyon Script", "Great Vibes", "Dancing Script"].includes(f.display);
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":wght@400;600;700&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":" + (esScript ? "wght@400" : "wght@400;600;700") + "&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
     document.head.appendChild(link);
     document.documentElement.style.setProperty("--font-display", '"' + f.display + '", Georgia, serif');
     document.documentElement.style.setProperty("--font-body", '"' + f.body + '", system-ui, sans-serif');
