@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de la web — bloques + textos</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      grid-template-rows: auto 1fr;
+      height: 100vh;
+      background: #ece7df;
+      color: #2f2a24;
+    }
+    header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.2rem;
+      background: #fff;
+      border-bottom: 1px solid #ddd3c4;
+    }
+    header h1 { font-size: 1.05rem; margin: 0; flex: 1; }
+    .pestana {
+      font: inherit; font-size: 0.85rem; padding: 0.45rem 1rem;
+      border-radius: 999px; border: 1px solid #a05c3b; background: #fff; color: #a05c3b; cursor: pointer;
+    }
+    .pestana.activa { background: #a05c3b; color: #fff; }
+    aside { overflow-y: auto; padding: 1.2rem; background: #fff; border-right: 1px solid #ddd3c4; }
+    aside p.nota { font-size: 0.8rem; color: #6e6357; margin: 0 0 1rem; }
+    .paleta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .paleta button {
+      font: inherit; font-size: 0.78rem; padding: 0.4rem 0.7rem;
+      border-radius: 999px; border: 1px solid #a05c3b; background: #fff; color: #a05c3b; cursor: pointer;
+    }
+    .paleta button:hover { background: #a05c3b; color: #fff; }
+    .bloque {
+      border: 1px solid #e0d6c8; border-radius: 10px; padding: 0.7rem; margin-bottom: 0.7rem; background: #fbf8f3;
+    }
+    .bloque .cabecera { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+    .bloque .cabecera strong { font-size: 0.85rem; }
+    .bloque .ops button {
+      font-size: 0.75rem; border: 1px solid #d8cdbd; background: #fff; border-radius: 6px; cursor: pointer; padding: 0.15rem 0.45rem; margin-left: 0.25rem;
+    }
+    .bloque .ops .borrar { color: #b03a2e; border-color: #e5b8b3; }
+    label { display: block; font-size: 0.75rem; margin: 0.4rem 0 0.15rem; color: #6e6357; }
+    input[type="text"], textarea {
+      width: 100%; font: inherit; font-size: 0.85rem; padding: 0.4rem 0.55rem;
+      border: 1px solid #d8cdbd; border-radius: 7px;
+    }
+    textarea { resize: vertical; }
+    fieldset { border: 1px solid #e0d6c8; border-radius: 10px; margin: 0 0 1rem; padding: 0.8rem; }
+    legend { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #a05c3b; }
+    .fila-color { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
+    .fila-color label { margin: 0; flex: 1; }
+    input[type="color"] { width: 44px; height: 30px; border: 1px solid #d8cdbd; border-radius: 6px; padding: 0; background: none; }
+    .acciones { display: grid; gap: 0.5rem; margin-top: 0.8rem; }
+    .acciones button { font: inherit; font-size: 0.88rem; padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid #a05c3b; cursor: pointer; }
+    .primario { background: #a05c3b; color: #fff; }
+    .secundario { background: #fff; color: #a05c3b; }
+    main { padding: 0; }
+    iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+    @media (max-width: 800px) {
+      body { grid-template-columns: 1fr; grid-template-rows: auto 45vh 55vh; }
+      aside { grid-row: 2; }
+      main { grid-row: 3; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Panel de la web de la boda</h1>
+    <button type="button" class="pestana activa" id="pest-bloques">Bloques</button>
+    <button type="button" class="pestana" id="pest-datos">Textos y colores</button>
+  </header>
+  <aside>
+    <p class="nota">Pestaña <b>Bloques</b>: estructura de la página. Pestaña <b>Textos y colores</b>: valores compartidos. Abajo, descarga el resultado y el script que lo publica solo.</p>
+    <div id="zona-bloques">
+      <div class="paleta" id="paleta"></div>
+      <div id="lista"></div>
+    </div>
+    <div id="zona-datos" hidden>
+      <form id="formulario"></form>
+    </div>
+    <div class="acciones">
+      <button type="button" class="primario" id="desc-html">Descargar index.html</button>
+      <button type="button" class="primario" id="desc-json">Descargar datos.json</button>
+      <button type="button" class="primario" id="desc-script">Descargar publicar.py (publica solo)</button>
+      <button type="button" class="secundario" id="reiniciar">Volver a la página actual</button>
+    </div>
+  </aside>
+  <main>
+    <iframe id="vista" title="Vista previa"></iframe>
+  </main>
+  <script src="panel.js"></script>
+</body>
+</html>
