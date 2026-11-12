@@ -255,20 +255,6 @@ function renderizarBloques() {
 function renderizarFormulario() {
   const formulario = document.getElementById("formulario");
   formulario.innerHTML = "";
-  const gt = document.createElement("fieldset");
-  gt.innerHTML = "<legend>Textos compartidos</legend>";
-  for (const [clave, etiqueta] of CAMPOS_TEXTO) {
-    const label = document.createElement("label");
-    label.textContent = etiqueta;
-    label.htmlFor = "campo-" + clave;
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = "campo-" + clave;
-    input.value = datos.textos[clave] || "";
-    input.addEventListener("input", () => { datos.textos[clave] = input.value; actualizarVista(); });
-    gt.append(label, input);
-  }
-  formulario.append(gt);
   const gc = document.createElement("fieldset");
   gc.innerHTML = "<legend>Colores</legend>";
   for (const [clave, etiqueta] of CAMPOS_COLOR) {
