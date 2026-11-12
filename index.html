@@ -15,7 +15,7 @@
 
   <nav class="topnav" aria-label="Navegación principal">
     <div class="nav-inner">
-      <a class="brand" href="#inicio">Victoria &amp; Pedro</a>
+      <a class="brand" href="#inicio" data-campo="marca">Victoria &amp; Pedro</a>
       <ul class="nav-links" role="list">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
@@ -30,16 +30,16 @@
   </nav>
 
   <header class="hero" id="inicio">
-    <p class="hero-date">26 . 06 . 2027</p>
-    <h1 class="hero-names">Victoria <span class="amp">&amp;</span> Pedro</h1>
-    <p class="hero-place">Iglesia Catedral Castrense · Finca Prados Moros</p>
+    <p class="hero-date" data-campo="fecha">26 . 06 . 2027</p>
+    <h1 class="hero-names"><span data-campo="nombre1">Victoria</span> <span class="amp">&amp;</span> <span data-campo="nombre2">Pedro</span></h1>
+    <p class="hero-place" data-campo="lugaresHero">Iglesia Catedral Castrense · Finca Prados Moros</p>
     <a class="btn btn-primary" href="#rsvp">Confirma asistencia</a>
   </header>
 
   <main id="contenido">
     <section class="section" id="nosotros" aria-labelledby="nosotros-titulo">
       <h2 id="nosotros-titulo">Nosotros</h2>
-      <p class="lead">Dos personas, una historia y un día para celebrarlo con todos vosotros. Estos son algunos de nuestros momentos favoritos.</p>
+      <p class="lead" data-campo="textoNosotros">Dos personas, una historia y un día para celebrarlo con todos vosotros. Estos son algunos de nuestros momentos favoritos.</p>
       <ul class="gallery" role="list">
         <li class="gallery-item">
           <img src="fotos/momento-1.jpg" alt="Foto de Victoria y Pedro en su primer viaje juntos" loading="lazy" width="600" height="600">
@@ -73,9 +73,9 @@
       <div class="cards">
         <article class="card">
           <h3>Ceremonia</h3>
-          <p class="card-time">18:00</p>
-          <p>Iglesia Catedral Castrense</p>
-          <p class="card-link"><a href="https://www.google.com/maps/search/?api=1&query=Iglesia%20Catedral%20Castrense" target="_blank" rel="noopener">Ver en el mapa</a></p>
+          <p class="card-time" data-campo="horaCeremonia">18:00</p>
+          <p data-campo="lugarCeremonia">Iglesia Catedral Castrense</p>
+          <p class="card-link"><a href="https://www.google.com/maps/search/?api=1&query=Iglesia%20Catedral%20Castrense" target="_blank" rel="noopener" data-mapa="lugarCeremonia">Ver en el mapa</a></p>
           <div class="card-photos">
             <img src="fotos/ceremonia-1.jpg" alt="Foto del exterior de la Iglesia Catedral Castrense" loading="lazy" width="600" height="450">
             <img src="fotos/ceremonia-2.jpg" alt="Foto del interior de la Iglesia Catedral Castrense" loading="lazy" width="600" height="450">
@@ -83,9 +83,9 @@
         </article>
         <article class="card">
           <h3>Celebración</h3>
-          <p class="card-time">20:00</p>
-          <p>Finca Prados Moros</p>
-          <p class="card-link"><a href="https://www.google.com/maps/search/?api=1&query=Finca%20Prados%20Moros" target="_blank" rel="noopener">Ver en el mapa</a></p>
+          <p class="card-time" data-campo="horaCelebracion">20:00</p>
+          <p data-campo="lugarCelebracion">Finca Prados Moros</p>
+          <p class="card-link"><a href="https://www.google.com/maps/search/?api=1&query=Finca%20Prados%20Moros" target="_blank" rel="noopener" data-mapa="lugarCelebracion">Ver en el mapa</a></p>
           <div class="card-photos">
             <img src="fotos/celebracion-1.jpg" alt="Foto del exterior de Finca Prados Moros" loading="lazy" width="600" height="450">
             <img src="fotos/celebracion-2.jpg" alt="Foto del jardín o salón de Finca Prados Moros" loading="lazy" width="600" height="450">
@@ -93,8 +93,8 @@
         </article>
         <article class="card">
           <h3>Código de vestimenta</h3>
-          <p class="card-time">Elegante</p>
-          <p>Nos encantaría veros guapos y cómodos para bailar hasta el amanecer.</p>
+          <p class="card-time" data-campo="dresscode">Elegante</p>
+          <p data-campo="textoDresscode">Nos encantaría veros guapos y cómodos para bailar hasta el amanecer.</p>
         </article>
       </div>
     </section>
@@ -155,13 +155,13 @@
     <section class="section section-alt" id="contacto" aria-labelledby="contacto-titulo">
       <h2 id="contacto-titulo">Contacto</h2>
       <p class="lead">¿Alguna duda? Escribidnos y os respondemos encantados.</p>
-      <p class="contact-line">Victoria: <a href="mailto:victoria@ejemplo.com">victoria@ejemplo.com</a></p>
-      <p class="contact-line">Pedro: <a href="mailto:pedro@ejemplo.com">pedro@ejemplo.com</a></p>
+      <p class="contact-line"><span data-campo="nombre1">Victoria</span>: <a href="mailto:victoria@ejemplo.com" data-campo="emailVictoria">victoria@ejemplo.com</a></p>
+      <p class="contact-line"><span data-campo="nombre2">Pedro</span>: <a href="mailto:pedro@ejemplo.com" data-campo="emailPedro">pedro@ejemplo.com</a></p>
     </section>
 
     <section class="section" id="rsvp" aria-labelledby="rsvp-titulo">
       <h2 id="rsvp-titulo">Confirma tu asistencia</h2>
-      <p class="lead">Nos hace mucha ilusión celebrar este día contigo. Confírmanos tu asistencia cuanto antes.</p>
+      <p class="lead" data-campo="textoRsvp">Nos hace mucha ilusión celebrar este día contigo. Confírmanos tu asistencia cuanto antes.</p>
       <form class="rsvp-form" action="#" method="post">
         <div class="field">
           <label for="nombre">Nombre completo</label>
@@ -190,8 +190,9 @@
   </main>
 
   <footer class="footer">
-    <p>Victoria &amp; Pedro · 26 de junio de 2027 · #VictoriaYPedro2027</p>
-    <p><a href="#inicio">Volver arriba</a></p>
+    <p><span data-campo="marca">Victoria &amp; Pedro</span> · <span data-campo="fechaLarga">26 de junio de 2027</span> · <span data-campo="hashtag">#VictoriaYPedro2027</span></p>
+    <p><a href="#inicio">Volver arriba</a> · <a href="editor.html">Editar página</a></p>
   </footer>
+  <script src="site.js" defer></script>
 </body>
 </html>

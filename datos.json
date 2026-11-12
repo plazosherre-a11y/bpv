@@ -1,0 +1,29 @@
+{
+  "textos": {
+    "titulo": "Victoria & Pedro | 26.06.2027",
+    "marca": "Victoria & Pedro",
+    "nombre1": "Victoria",
+    "nombre2": "Pedro",
+    "fecha": "26 . 06 . 2027",
+    "fechaLarga": "26 de junio de 2027",
+    "hashtag": "#VictoriaYPedro2027",
+    "lugaresHero": "Iglesia Catedral Castrense · Finca Prados Moros",
+    "lugarCeremonia": "Iglesia Catedral Castrense",
+    "horaCeremonia": "18:00",
+    "lugarCelebracion": "Finca Prados Moros",
+    "horaCelebracion": "20:00",
+    "dresscode": "Elegante",
+    "textoDresscode": "Nos encantaría veros guapos y cómodos para bailar hasta el amanecer.",
+    "textoNosotros": "Dos personas, una historia y un día para celebrarlo con todos vosotros. Estos son algunos de nuestros momentos favoritos.",
+    "textoRsvp": "Nos hace mucha ilusión celebrar este día contigo. Confírmanos tu asistencia cuanto antes.",
+    "emailVictoria": "victoria@ejemplo.com",
+    "emailPedro": "pedro@ejemplo.com"
+  },
+  "colores": {
+    "bg": "#fdfcfa",
+    "bg-alt": "#f5f0e8",
+    "accent": "#a05c3b",
+    "accent-dark": "#844829",
+    "ink": "#2f2a24"
+  }
+}
