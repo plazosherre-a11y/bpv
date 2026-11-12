@@ -348,8 +348,8 @@ const PUBLICAR_PY = [
   "    print('==> Actualizando repositorio...')",
   '    run(["git", "-C", str(DEST), "pull", "--ff-only"])',
   "else:",
-  '    print("==> Clonando repositorio...")',
-  '    run(["git", "clone", REPO_URL, str(DEST)])',
+  '    print("==> Clonando repositorio (rama main)...")',
+  '    run(["git", "clone", "--branch", "main", REPO_URL, str(DEST)])',
   "",
   "for nombre in [\"index.html\", \"datos.json\"]:",
   "    origen = AQUI / nombre",
@@ -358,8 +358,8 @@ const PUBLICAR_PY = [
   "        shutil.copy(origen, DEST / nombre)",
   "",
   'run(["git", "-C", str(DEST), "add", "-A"])',
-  'subprocess.run(["git", "-C", str(DEST), "commit", "-m", "Actualizar web desde el panel"], check=False)',
-  'run(["git", "-C", str(DEST), "push"])',
+  'subprocess.run(["git", "-C", str(DEST), "-c", "user.name=Panel Boda", "-c", "user.email=panel@localhost", "commit", "-m", "Actualizar web desde el panel"], check=False)',
+  'run(["git", "-C", str(DEST), "push", "origin", "HEAD"])',
   'print("==> Publicado en GitHub Pages (tarda 1-2 minutos en verse).")'
 ].join("\n") + "\n";
 
