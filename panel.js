@@ -34,9 +34,17 @@ const TIPOS = {
     nombre: "Normas de protocolo",
     campos: [
       ["titulo", "Título"],
-      ["mujeres", "Dress code mujeres"],
-      ["hombres", "Dress code hombres"],
-      ["normas", "Normas de comportamiento (una por línea)"]
+      ["mujerCiviles", "Mujer - Civiles"],
+      ["mujerArmada", "Mujer - Armada"],
+      ["mujerTierra", "Mujer - Ejército de Tierra"],
+      ["mujerAire", "Mujer - Ejército del Aire"],
+      ["mujerCuerpos", "Mujer - Cuerpos Comunes"],
+      ["hombreCiviles", "Hombre - Civiles"],
+      ["hombreArmada", "Hombre - Armada"],
+      ["hombreTierra", "Hombre - Ejército de Tierra"],
+      ["hombreAire", "Hombre - Ejército del Aire"],
+      ["hombreCuerpos", "Hombre - Cuerpos Comunes"],
+      ["normas", "Normas (una por línea, sin título)"]
     ]
   },
   formulario: {
@@ -93,7 +101,7 @@ function porDefecto() {
   return [
     { tipo: "portada", campos: { nombre1: t.nombre1 || "Victoria", nombre2: t.nombre2 || "Pedro", fecha: t.fecha || "", lugares: t.lugaresHero || "" } },
     { tipo: "localizacion", campos: { titulo: "Localización y horarios", ceremoniaLugar: t.lugarCeremonia || "", ceremoniaHora: t.horaCeremonia || "", celebracionLugar: t.lugarCelebracion || "", celebracionHora: t.horaCelebracion || "" } },
-    { tipo: "protocolo", campos: { titulo: "Normas de protocolo", mujeres: "Vestido largo o de cóctel. Evitar el blanco (reservado a la novia).", hombres: "Traje oscuro; corbata opcional.", normas: "Llegad con 15 minutos de antelación a cada acto.\nConfirmad vuestra asistencia antes de mayo de 2027.\nSi tenéis cualquier duda, escribidnos por el apartado de contacto." } },
+    { tipo: "protocolo", campos: { titulo: "Normas de protocolo", mujerCiviles: "Vestido largo", mujerArmada: "Diario modalidad B", mujerTierra: "Etiqueta", mujerAire: "Gala", mujerCuerpos: "Gala modalidad B", hombreCiviles: "Traje corbata", hombreArmada: "Diario modalidad B", hombreTierra: "Etiqueta", hombreAire: "Diario", hombreCuerpos: "Gala modalidad B", normas: "Se recomienda acudir con los hombros cubiertos así como mantener el decoro durante toda la ceremonia religiosa.\nA fin de poder comenzar con puntualidad se ruega llegar al lugar de la ceremonia con 20 minutos de antelación sobre la hora prevista de comienzo." } },
     { tipo: "lista", campos: { titulo: "Lista de bodas", texto: "Vuestra presencia es nuestro mejor regalo. Si aun así queréis contribuir, aquí tenéis nuestra lista:", enlace: "#" } },
     { tipo: "preguntas", campos: { titulo: "Preguntas", items: "¿Dónde aparco? | Habrá parking habilitado.\n¿Hay transporte entre los lugares? | Sí, habrá autobuses.\n¿Puedo llevar niños? | ¡Por supuesto!" } },
     { tipo: "contacto", campos: { titulo: "Contacto", email1: t.emailVictoria || "", email2: t.emailPedro || "" } },
@@ -187,14 +195,29 @@ function bloqueHtml(b, i) {
     case "protocolo": {
       const normas = String(f.normas || "").split("\n").map((l) => l.trim()).filter(Boolean)
         .map((l) => `<li>${escapar(l)}</li>`).join("");
+      const militar = (armada, tierra, aire, cuerpos) => `
+      <p style="margin:0.4rem 0 0.2rem;"><strong>Militares:</strong></p>
+      <ul style="margin:0;padding-left:1.2rem;">
+        <li>Armada: ${escapar(armada)}</li>
+        <li>Ejército de Tierra: ${escapar(tierra)}</li>
+        <li>Ejército del Aire: ${escapar(aire)}</li>
+        <li>Cuerpos Comunes: ${escapar(cuerpos)}</li>
+      </ul>`;
       return `<section class="section section-alt" id="${id}">
       <h2>${escapar(f.titulo)}</h2>
       <div class="cards">
-        <article class="card"><h3>Mujeres</h3><p>${escapar(f.mujeres)}</p></article>
-        <article class="card"><h3>Hombres</h3><p>${escapar(f.hombres)}</p></article>
+        <article class="card" style="text-align:left;">
+          <h3>Mujer</h3>
+          <p style="margin:0.2rem 0;"><strong>Civiles:</strong> ${escapar(f.mujerCiviles)}</p>
+          ${militar(f.mujerArmada, f.mujerTierra, f.mujerAire, f.mujerCuerpos)}
+        </article>
+        <article class="card" style="text-align:left;">
+          <h3>Hombre</h3>
+          <p style="margin:0.2rem 0;"><strong>Civiles:</strong> ${escapar(f.hombreCiviles)}</p>
+          ${militar(f.hombreArmada, f.hombreTierra, f.hombreAire, f.hombreCuerpos)}
+        </article>
       </div>
       <div class="card" style="margin-top:1.5rem;text-align:left;">
-        <h3>Normas de comportamiento</h3>
         <ul style="margin:0;padding-left:1.2rem;">${normas}</ul>
       </div>
     </section>`;
@@ -250,7 +273,7 @@ function documentoHtml() {
 ${cuerpo}
   </main>
   <footer class="footer">
-    <p>${escapar(marca)}${fecha ? " · " + escapar(fecha) : ""}${datos.textos.hashtag ? " · " + escapar(datos.textos.hashtag) : ""}</p>
+    <p>${escapar(marca)}${fecha ? " · " + escapar(fecha) : ""}</p>
     <p><a href="#inicio">Volver arriba</a> · <a href="panel.html">Panel de edición</a></p>
   </footer>
 </body>
