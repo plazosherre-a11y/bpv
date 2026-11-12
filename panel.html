@@ -11,11 +11,11 @@
     body {
       margin: 0;
       font-family: "Segoe UI", system-ui, sans-serif;
-      display: grid;
-      grid-template-columns: 400px minmax(0, 1fr);
-      grid-template-rows: auto minmax(0, 1fr);
+      display: flex;
+      flex-direction: column;
       height: 100vh;
       height: 100svh;
+      overflow: hidden;
       background: #ece7df;
       color: #2f2a24;
     }
@@ -54,8 +54,7 @@
     .gate .error { color: #b03a2e; font-size: 0.85rem; }
     .gate .aviso { font-size: 0.72rem; color: #9a8d7d; }
     header {
-      grid-column: 1 / -1;
-      grid-row: 1;
+      flex: 0 0 auto;
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -69,9 +68,10 @@
       border-radius: 999px; border: 1px solid #a05c3b; background: #fff; color: #a05c3b; cursor: pointer;
     }
     .pestana.activa { background: #a05c3b; color: #fff; }
+    .contenido { display: flex; flex: 1; min-height: 0; }
     aside {
-      grid-column: 1;
-      grid-row: 2;
+      flex: 0 0 360px;
+      width: 360px;
       overflow-y: auto;
       min-height: 0;
       padding: 1.2rem;
@@ -110,8 +110,7 @@
     .primario { background: #a05c3b; color: #fff; }
     .secundario { background: #fff; color: #a05c3b; }
     main {
-      grid-column: 2;
-      grid-row: 2;
+      flex: 1;
       min-width: 0;
       min-height: 0;
       padding: 0;
@@ -120,11 +119,9 @@
     }
     #estado { font-size: 0.75rem; color: #b03a2e; padding: 0.3rem 0.8rem; background: #fff; border-bottom: 1px solid #ddd3c4; min-height: 1.2em; }
     iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: #fff; }
-    @media (max-width: 800px) {
-      body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 45vh) minmax(0, 55vh); }
-      header { grid-column: 1; grid-row: 1; }
-      aside { grid-column: 1; grid-row: 2; border-right: 0; border-bottom: 1px solid #ddd3c4; }
-      main { grid-column: 1; grid-row: 3; }
+    @media (max-width: 700px) {
+      .contenido { flex-direction: column; }
+      aside { flex: 0 0 45vh; width: auto; border-right: 0; border-bottom: 1px solid #ddd3c4; }
     }
   </style>
 </head>
@@ -145,12 +142,13 @@
     </form>
   </div>
 
-  <div id="app" hidden>
+  <div id="app" hidden style="display: flex; flex-direction: column; height: 100%;">
   <header>
     <h1>Panel de la web de la boda</h1>
     <button type="button" class="pestana activa" id="pest-bloques">Bloques</button>
     <button type="button" class="pestana" id="pest-datos">Textos y colores</button>
   </header>
+  <div class="contenido">
   <aside>
     <p class="nota">Pestaña <b>Bloques</b>: estructura de la página. Pestaña <b>Textos y colores</b>: valores compartidos. Abajo, descarga el resultado y el script que lo publica solo.</p>
     <div id="zona-bloques">
@@ -171,6 +169,7 @@
     <div id="estado"></div>
     <iframe id="vista" title="Vista previa"></iframe>
   </main>
+  </div>
   </div>
   <script src="panel.js"></script>
 </body>
