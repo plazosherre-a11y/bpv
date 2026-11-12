@@ -19,6 +19,10 @@
     "emailVictoria": "victoria@ejemplo.com",
     "emailPedro": "pedro@ejemplo.com"
   },
+  "fuentes": {
+    "display": "Cormorant Garamond",
+    "body": "Jost"
+  },
   "colores": {
     "bg": "#fdfcfa",
     "bg-alt": "#f5f0e8",

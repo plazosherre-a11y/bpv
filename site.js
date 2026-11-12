@@ -18,6 +18,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  if (datos.fuentes) {
+    const f = datos.fuentes;
+    const fam = (s) => encodeURIComponent(s).replace(/%20/g, "+");
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":wght@400;600;700&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
+    document.head.appendChild(link);
+    document.documentElement.style.setProperty("--font-display", '"' + f.display + '", Georgia, serif');
+    document.documentElement.style.setProperty("--font-body", '"' + f.body + '", system-ui, sans-serif');
+  }
+
   const textos = datos.textos || {};
   if (textos.titulo) document.title = textos.titulo;
 

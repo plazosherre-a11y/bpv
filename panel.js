@@ -44,6 +44,17 @@ const CAMPOS_COLOR = [
   ["ink", "Color del texto"]
 ];
 
+const FUENTES_TITULAR = ["Cormorant Garamond", "Playfair Display", "Great Vibes", "Dancing Script"];
+const FUENTES_TEXTO = ["Jost", "Lato", "Montserrat", "Open Sans"];
+
+function fam(f) {
+  return encodeURIComponent(f).replace(/%20/g, "+");
+}
+
+function fuentesUrl(f) {
+  return "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":wght@400;600;700&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
+}
+
 const BASE = location.href.replace(/[^/]*$/, "");
 
 let datos = { textos: {}, colores: {} };
@@ -158,7 +169,10 @@ function documentoHtml(modoVistaPrevia) {
   const cuerpo = bloques.map((b, i) => bloqueHtml(b, i)).join("\n");
   const marca = datos.textos.marca || "Nuestra boda";
   const fecha = datos.textos.fechaLarga || "";
-  const vars = Object.entries(datos.colores || {}).map(([k, v]) => `--${k}:${v};`).join("");
+  const fuentes = datos.fuentes || { display: "Cormorant Garamond", body: "Jost" };
+  const fontsHref = fuentesUrl(fuentes);
+  const vars = Object.entries(datos.colores || {}).map(([k, v]) => `--${k}:${v};`).join("") +
+    `--font-display:"${fuentes.display}",Georgia,serif;--font-body:"${fuentes.body}",system-ui,sans-serif;`;
   const baseTag = modoVistaPrevia ? `  <base href="${BASE}">\n` : "";
   return `<!DOCTYPE html>
 <html lang="es">
@@ -168,7 +182,7 @@ function documentoHtml(modoVistaPrevia) {
 ${baseTag}  <title>${escapar(marca)}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="${fontsHref}" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>:root{${vars}}</style>
 </head>
@@ -275,13 +289,62 @@ function renderizarFormulario() {
     gc.append(fila);
   }
   formulario.append(gc);
+
+  const gf = document.createElement("fieldset");
+  gf.innerHTML = "<legend>Tipografías</legend>";
+  const filasFuente = [
+    ["display", "Títulos", FUENTES_TITULAR],
+    ["body", "Texto", FUENTES_TEXTO]
+  ];
+  datos.fuentes = datos.fuentes || { display: "Cormorant Garamond", body: "Jost" };
+  for (const [clave, etiqueta, opciones] of filasFuente) {
+    const label = document.createElement("label");
+    label.textContent = etiqueta;
+    label.htmlFor = "fuente-" + clave;
+    const select = document.createElement("select");
+    select.id = "fuente-" + clave;
+    select.style.cssText = "width:100%;font:inherit;font-size:0.9rem;padding:0.4rem 0.55rem;border:1px solid #d8cdbd;border-radius:7px;";
+    for (const op of opciones) {
+      const opt = document.createElement("option");
+      opt.value = op;
+      opt.textContent = op;
+      if (datos.fuentes[clave] === op) opt.selected = true;
+      select.append(opt);
+    }
+    select.addEventListener("change", () => {
+      datos.fuentes[clave] = select.value;
+      actualizarVista();
+    });
+    gf.append(label, select);
+  }
+  formulario.append(gf);
 }
+
+function reportarEstado(msg) {
+  const el = document.getElementById("estado");
+  if (el) el.textContent = msg;
+}
+
+window.addEventListener("error", (e) => reportarEstado("Error: " + e.message));
 
 let temporizador = null;
 function actualizarVista() {
   clearTimeout(temporizador);
   temporizador = setTimeout(() => {
-    document.getElementById("vista").srcdoc = documentoHtml(true);
+    const html = documentoHtml(true);
+    const vista = document.getElementById("vista");
+    try {
+      vista.srcdoc = html;
+      const doc = vista.contentDocument || (vista.contentWindow && vista.contentWindow.document);
+      if (doc) {
+        doc.open();
+        doc.write(html);
+        doc.close();
+      }
+      reportarEstado("");
+    } catch (e) {
+      reportarEstado("Error en la vista previa: " + e.message);
+    }
   }, 250);
 }
 

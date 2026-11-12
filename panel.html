@@ -98,8 +98,9 @@
     .acciones button { font: inherit; font-size: 0.88rem; padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid #a05c3b; cursor: pointer; }
     .primario { background: #a05c3b; color: #fff; }
     .secundario { background: #fff; color: #a05c3b; }
-    main { padding: 0; }
-    iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+    main { padding: 0; display: flex; flex-direction: column; }
+    #estado { font-size: 0.75rem; color: #b03a2e; padding: 0.3rem 0.8rem; background: #fff; border-bottom: 1px solid #ddd3c4; min-height: 1.2em; }
+    iframe { width: 100%; flex: 1; border: 0; background: #fff; }
     @media (max-width: 800px) {
       body { grid-template-columns: 1fr; grid-template-rows: auto 45vh 55vh; }
       aside { grid-row: 2; }
@@ -147,6 +148,7 @@
     </div>
   </aside>
   <main>
+    <div id="estado"></div>
     <iframe id="vista" title="Vista previa"></iframe>
   </main>
   </div>
