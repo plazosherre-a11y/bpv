@@ -24,10 +24,10 @@
     "body": "Jost"
   },
   "colores": {
-    "bg": "#f5f9fd",
-    "bg-alt": "#e2eef9",
-    "accent": "#1f4e79",
-    "accent-dark": "#143a5e",
-    "ink": "#1d2d3d"
+    "bg": "#e5f2ff",
+    "bg-alt": "#81a9d5",
+    "accent": "#283177",
+    "accent-dark": "#1700c2",
+    "ink": "#2f2a24"
   }
 }
