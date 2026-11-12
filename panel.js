@@ -361,12 +361,14 @@ if (sessionStorage.getItem("bpv-panel-ok") === "1") {
   document.getElementById("login").addEventListener("submit", (e) => {
     e.preventDefault();
     const u = document.getElementById("usuario").value.trim().toLowerCase();
-    const c = document.getElementById("clave").value;
+    const c = document.getElementById("clave").value.trim().replace(/[–—]/g, "-");
     if (USUARIOS.includes(u) && c === CLAVE) {
       sessionStorage.setItem("bpv-panel-ok", "1");
       iniciar();
     } else {
       document.getElementById("error").hidden = false;
+      document.getElementById("clave").value = "";
+      document.getElementById("clave").focus();
     }
   });
 }
