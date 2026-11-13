@@ -117,7 +117,9 @@
       flex-direction: column;
     }
     #estado { font-size: 0.75rem; color: #b03a2e; padding: 0.3rem 0.8rem; background: #fff; border-bottom: 1px solid #c9dcf2; min-height: 1.2em; }
-    iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: #fff; }
+    iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: #fff; transition: width 0.25s ease; }
+    main.vp-movil { background: #d7e3f2; }
+    main.vp-movil iframe { width: 390px; max-width: 100%; margin: 0 auto; border-left: 1px solid #c9dcf2; border-right: 1px solid #c9dcf2; }
     @media (max-width: 700px) {
       .contenido { flex-direction: column; }
       aside { flex: 0 0 45vh; width: auto; border-right: 0; border-bottom: 1px solid #c9dcf2; }
@@ -146,6 +148,9 @@
     <h1>Panel de la web de la boda</h1>
     <button type="button" class="pestana activa" id="pest-bloques">Bloques</button>
     <button type="button" class="pestana" id="pest-datos">Colores y tipografías</button>
+    <span style="flex:1"></span>
+    <button type="button" class="pestana activa" id="vp-ordenador" title="Vista de ordenador">💻</button>
+    <button type="button" class="pestana" id="vp-movil" title="Vista de móvil (390 px)">📱</button>
   </header>
   <div class="contenido">
   <aside>

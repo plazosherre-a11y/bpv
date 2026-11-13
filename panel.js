@@ -482,6 +482,16 @@ function activarPestana( cual ) {
 pestBloques.addEventListener("click", () => activarPestana("bloques"));
 pestDatos.addEventListener("click", () => activarPestana("datos"));
 
+const vpOrdenador = document.getElementById("vp-ordenador");
+const vpMovil = document.getElementById("vp-movil");
+function modoVista(movil) {
+  document.querySelector("main").classList.toggle("vp-movil", movil);
+  vpOrdenador.classList.toggle("activa", !movil);
+  vpMovil.classList.toggle("activa", movil);
+}
+vpOrdenador.addEventListener("click", () => modoVista(false));
+vpMovil.addEventListener("click", () => modoVista(true));
+
 const USUARIOS = ["pedro", "victoria"];
 const CLAVE = atob("Q2FkaXotMjE=");
 
