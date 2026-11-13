@@ -15,6 +15,7 @@
   <nav class="topnav" aria-label="Navegación principal">
     <div class="nav-inner">
       <a class="brand" href="#inicio">Victoria y Pedro</a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <ul class="nav-links" role="list"><li><a href="#inicio">Inicio</a></li><li><a href="#sec2">Localización y horarios</a></li><li><a href="#sec3">Normas de protocolo</a></li><li><a href="#sec4">Lista de bodas</a></li><li><a href="#sec5">Preguntas</a></li><li><a href="#sec6">Contacto</a></li><li><a href="#sec7">Confirma tu asistencia</a></li></ul>
     </div>
   </nav>
@@ -95,5 +96,18 @@
     <p>Victoria y Pedro · 26 de junio de 2027</p>
     <p><a href="#inicio">Volver arriba</a> · <a href="panel.html">Panel de edición</a></p>
   </footer>
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const abierto = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", abierto);
+      });
+      navLinks.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => navLinks.classList.remove("open"))
+      );
+    }
+  </script>
 </body>
 </html>

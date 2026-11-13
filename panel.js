@@ -127,6 +127,7 @@ function navHtml() {
   return `<nav class="topnav" aria-label="Navegación principal">
     <div class="nav-inner">
       <a class="brand" href="#inicio">${escapar(datos.textos.marca || "Nuestra boda")}</a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <ul class="nav-links" role="list"><li><a href="#inicio">Inicio</a></li>${enlaces}</ul>
     </div>
   </nav>`;
@@ -299,6 +300,19 @@ ${cuerpo}
     <p>${escapar(marca)}${fecha ? " · " + escapar(fecha) : ""}</p>
     <p><a href="#inicio">Volver arriba</a> · <a href="panel.html">Panel de edición</a></p>
   </footer>
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const abierto = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", abierto);
+      });
+      navLinks.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => navLinks.classList.remove("open"))
+      );
+    }
+  </script>
 </body>
 </html>
 `;
