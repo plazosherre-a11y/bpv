@@ -19,7 +19,6 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
-  font-size: 125%;
 }
 
 body {
@@ -483,7 +482,6 @@ summary:focus-visible {
 
 @media (max-width: 720px) {
   html {
-    font-size: 100%;
     scroll-padding-top: 128px;
   }
 
