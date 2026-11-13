@@ -63,7 +63,8 @@ const CAMPOS_COLOR = [
   ["ink", "Color del texto"]
 ];
 
-const FUENTES_TITULAR = ["Great Vibes", "Pinyon Script", "Monsieur La Doulaise", "Cormorant Garamond", "Playfair Display", "Dancing Script"];
+const FUENTES_TITULAR = ["Great Vibes", "Pinyon Script", "Monsieur La Doulaise", "Dancing Script"];
+const FUENTES_SECCIONES = ["Cormorant Garamond", "Playfair Display", "Great Vibes", "Pinyon Script"];
 const FUENTES_TEXTO = ["Jost", "Lato", "Montserrat", "Open Sans"];
 const FUENTES_SCRIPT = ["Pinyon Script", "Great Vibes", "Dancing Script", "Monsieur La Doulaise"];
 
@@ -72,8 +73,10 @@ function fam(f) {
 }
 
 function fuentesUrl(f) {
-  const pesoDisplay = FUENTES_SCRIPT.includes(f.display) ? "wght@400" : "wght@400;600;700";
-  return "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":" + pesoDisplay + "&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
+  const peso = (nombre) => (FUENTES_SCRIPT.includes(nombre) ? "wght@400" : "wght@400;600;700");
+  return "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":" + peso(f.display) +
+    "&family=" + fam(f.secciones || "Cormorant Garamond") + ":" + peso(f.secciones || "Cormorant Garamond") +
+    "&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
 }
 
 let datos = { textos: {}, colores: {} };
@@ -250,10 +253,10 @@ function documentoHtml() {
   const cuerpo = bloques.map((b, i) => bloqueHtml(b, i)).join("\n");
   const marca = datos.textos.marca || "Nuestra boda";
   const fecha = datos.textos.fechaLarga || "";
-  const fuentes = datos.fuentes || { display: "Cormorant Garamond", body: "Jost" };
+  const fuentes = datos.fuentes || { display: "Great Vibes", secciones: "Cormorant Garamond", body: "Jost" };
   const fontsHref = fuentesUrl(fuentes);
   const vars = Object.entries(datos.colores || {}).map(([k, v]) => `--${k}:${v};`).join("") +
-    `--font-display:"${fuentes.display}",Georgia,serif;--font-body:"${fuentes.body}",system-ui,sans-serif;`;
+    `--font-display:"${fuentes.display}",Georgia,serif;--font-secciones:"${fuentes.secciones || "Cormorant Garamond"}",Georgia,serif;--font-body:"${fuentes.body}",system-ui,sans-serif;`;
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -358,11 +361,12 @@ function renderizarFormulario() {
 
   const gf = document.createElement("fieldset");
   gf.innerHTML = "<legend>Tipografías</legend>";
+  datos.fuentes = datos.fuentes || { display: "Great Vibes", secciones: "Cormorant Garamond", body: "Jost" };
   const filasFuente = [
-    ["display", "Títulos", FUENTES_TITULAR],
+    ["display", "Nombre de la portada", FUENTES_TITULAR],
+    ["secciones", "Títulos de sección", FUENTES_SECCIONES],
     ["body", "Texto", FUENTES_TEXTO]
   ];
-  datos.fuentes = datos.fuentes || { display: "Cormorant Garamond", body: "Jost" };
   for (const [clave, etiqueta, opciones] of filasFuente) {
     const label = document.createElement("label");
     label.textContent = etiqueta;

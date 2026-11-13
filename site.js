@@ -24,9 +24,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const esScript = ["Pinyon Script", "Great Vibes", "Dancing Script", "Monsieur La Doulaise"].includes(f.display);
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":" + (esScript ? "wght@400" : "wght@400;600;700") + "&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
+    const sec = f.secciones || "Cormorant Garamond";
+    const esSecScript = ["Pinyon Script", "Great Vibes", "Dancing Script", "Monsieur La Doulaise"].includes(sec);
+    link.href = "https://fonts.googleapis.com/css2?family=" + fam(f.display) + ":" + (esScript ? "wght@400" : "wght@400;600;700") + "&family=" + fam(sec) + ":" + (esSecScript ? "wght@400" : "wght@400;600;700") + "&family=" + fam(f.body) + ":wght@300;400;500&display=swap";
     document.head.appendChild(link);
     document.documentElement.style.setProperty("--font-display", '"' + f.display + '", Georgia, serif');
+    document.documentElement.style.setProperty("--font-secciones", '"' + (f.secciones || "Cormorant Garamond") + '", Georgia, serif');
     document.documentElement.style.setProperty("--font-body", '"' + f.body + '", system-ui, sans-serif');
   }
 
