@@ -63,9 +63,9 @@ const CAMPOS_COLOR = [
   ["ink", "Color del texto"]
 ];
 
-const FUENTES_TITULAR = ["Pinyon Script", "Cormorant Garamond", "Playfair Display", "Great Vibes", "Dancing Script"];
+const FUENTES_TITULAR = ["Great Vibes", "Pinyon Script", "Monsieur La Doulaise", "Cormorant Garamond", "Playfair Display", "Dancing Script"];
 const FUENTES_TEXTO = ["Jost", "Lato", "Montserrat", "Open Sans"];
-const FUENTES_SCRIPT = ["Pinyon Script", "Great Vibes", "Dancing Script"];
+const FUENTES_SCRIPT = ["Pinyon Script", "Great Vibes", "Dancing Script", "Monsieur La Doulaise"];
 
 function fam(f) {
   return encodeURIComponent(f).replace(/%20/g, "+");
