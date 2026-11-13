@@ -133,7 +133,7 @@ function bloqueHtml(b, i) {
     case "portada":
       return `<header class="hero" id="inicio">
     <p class="hero-date">${escapar(f.fecha)}</p>
-    <h1 class="hero-names">${escapar(f.nombre1)} <span class="amp">&amp;</span> ${escapar(f.nombre2)}</h1>
+    <h1 class="hero-names">${escapar(f.nombre1)} <span class="amp">y</span> ${escapar(f.nombre2)}</h1>
     <p class="hero-place">${escapar(f.lugares)}</p>
     <a class="btn btn-primary" href="#rsvp">Confirma tu asistencia</a>
   </header>`;
