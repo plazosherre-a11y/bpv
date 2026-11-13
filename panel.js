@@ -49,7 +49,7 @@ const TIPOS = {
   },
   formulario: {
     nombre: "Confirma tu asistencia",
-    campos: [["titulo", "Título"], ["texto", "Texto introductorio"]]
+    campos: [["titulo", "Título"], ["texto", "Texto introductorio"], ["endpoint", "Endpoint del servicio de formulario (ej. https://formspree.io/f/XXXX); vacío = sin envío"]]
   },
   contacto: {
     nombre: "Contacto",
@@ -228,7 +228,8 @@ function bloqueHtml(b, i) {
     case "formulario":
       return `<section class="section section-alt" id="rsvp"><h2>${escapar(f.titulo)}</h2>
       <p class="lead">${escapar(f.texto)}</p>
-      <form class="rsvp-form" action="#" method="post">
+      <form class="rsvp-form" action="${f.endpoint ? escapar(f.endpoint) : "#"}" method="post">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
         <div class="field"><label for="nombre">Nombre completo</label><input type="text" id="nombre" name="nombre" required></div>
         <div class="field"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" required></div>
         <fieldset class="field"><legend>¿Asistirás?</legend>
