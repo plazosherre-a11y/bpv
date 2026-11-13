@@ -114,7 +114,7 @@ function porDefecto() {
     { tipo: "lista", campos: { titulo: "Lista de bodas", texto: "Vuestra presencia es nuestro mejor regalo. Si aun así queréis contribuir, aquí tenéis nuestra lista:", enlace: "#" } },
     { tipo: "preguntas", campos: { titulo: "Preguntas", items: "¿Dónde aparco? | Habrá parking habilitado.\n¿Hay transporte entre los lugares? | Sí, habrá autobuses.\n¿Puedo llevar niños? | ¡Por supuesto!" } },
     { tipo: "contacto", campos: { titulo: "Contacto", email1: t.emailVictoria || "", email2: t.emailPedro || "" } },
-    { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "", enlaceForm: "", endpoint: "", privacidad: "Al enviar este formulario aceptáis que tratemos vuestros datos (nombre, correo, asistencia, acompañantes, alergias y necesidades) únicamente para organizar la boda del 26 de junio de 2027, con base en vuestro consentimiento, y que serán eliminados una vez pasado el evento. Podéis ejercer los derechos de acceso, rectificación y supresión escribiendo a victoria@ejemplo.com." } }
+    { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "", enlaceForm: "https://docs.google.com/forms/d/e/1FAIpQLScOudif9hrtqNxII0OQYhGFpOWDW09re_7pNz5BJBKnFUXWIw/viewform?usp=publish-editor", endpoint: "", privacidad: "Al enviar este formulario aceptáis que tratemos vuestros datos (nombre, correo, asistencia, acompañantes, alergias y necesidades) únicamente para organizar la boda del 26 de junio de 2027, con base en vuestro consentimiento, y que serán eliminados una vez pasado el evento. Podéis ejercer los derechos de acceso, rectificación y supresión escribiendo a victoria@ejemplo.com." } }
   ];
 }
 
