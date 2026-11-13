@@ -49,7 +49,13 @@ const TIPOS = {
   },
   formulario: {
     nombre: "Confirma tu asistencia",
-    campos: [["titulo", "Título"], ["texto", "Texto introductorio"], ["endpoint", "Endpoint del servicio de formulario (ej. https://formspree.io/f/XXXX); vacío = sin envío"]]
+    campos: [
+      ["titulo", "Título"],
+      ["texto", "Texto introductorio"],
+      ["enlaceForm", "Enlace de Google Forms (se incrustará); si está vacío se usa el formulario propio"],
+      ["endpoint", "Endpoint del formulario propio (ej. Formspree); vacío = sin envío"],
+      ["privacidad", "Cláusula de protección de datos (texto pequeño bajo el formulario)"]
+    ]
   },
   contacto: {
     nombre: "Contacto",
@@ -108,7 +114,7 @@ function porDefecto() {
     { tipo: "lista", campos: { titulo: "Lista de bodas", texto: "Vuestra presencia es nuestro mejor regalo. Si aun así queréis contribuir, aquí tenéis nuestra lista:", enlace: "#" } },
     { tipo: "preguntas", campos: { titulo: "Preguntas", items: "¿Dónde aparco? | Habrá parking habilitado.\n¿Hay transporte entre los lugares? | Sí, habrá autobuses.\n¿Puedo llevar niños? | ¡Por supuesto!" } },
     { tipo: "contacto", campos: { titulo: "Contacto", email1: t.emailVictoria || "", email2: t.emailPedro || "" } },
-    { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "" } }
+    { tipo: "formulario", campos: { titulo: "Confirma tu asistencia", texto: t.textoRsvp || "", enlaceForm: "", endpoint: "", privacidad: "Al enviar este formulario aceptáis que tratemos vuestros datos (nombre, correo, asistencia, acompañantes, alergias y necesidades) únicamente para organizar la boda del 26 de junio de 2027, con base en vuestro consentimiento, y que serán eliminados una vez pasado el evento. Podéis ejercer los derechos de acceso, rectificación y supresión escribiendo a victoria@ejemplo.com." } }
   ];
 }
 
@@ -225,7 +231,17 @@ function bloqueHtml(b, i) {
       </div>
     </section>`;
     }
-    case "formulario":
+    case "formulario": {
+      const privacidad = `<p class="privacidad">${escapar(f.privacidad || "")}</p>`;
+      if (f.enlaceForm) {
+        let src = f.enlaceForm.trim();
+        if (!src.includes("embedded=true")) src += (src.includes("?") ? "&" : "?") + "embedded=true";
+        return `<section class="section section-alt" id="rsvp"><h2>${escapar(f.titulo)}</h2>
+      <p class="lead">${escapar(f.texto)}</p>
+      <iframe class="form-embed" src="${escapar(src)}" loading="lazy" title="Formulario de asistencia">Cargando…</iframe>
+      ${privacidad}
+    </section>`;
+      }
       return `<section class="section section-alt" id="rsvp"><h2>${escapar(f.titulo)}</h2>
       <p class="lead">${escapar(f.texto)}</p>
       <form class="rsvp-form" action="${f.endpoint ? escapar(f.endpoint) : "#"}" method="post">
@@ -241,7 +257,10 @@ function bloqueHtml(b, i) {
         <div class="field"><label for="necesidades">Necesidades especiales (movilidad, dieta...)</label><textarea id="necesidades" name="necesidades" rows="3"></textarea></div>
         <div class="field"><label for="mensaje">Mensaje para los novios</label><textarea id="mensaje" name="mensaje" rows="3"></textarea></div>
         <button class="btn btn-primary" type="submit">Enviar confirmación</button>
-      </form></section>`;
+      </form>
+      ${privacidad}
+    </section>`;
+    }
     case "contacto":
       return `<section class="section" id="${id}"><h2>${escapar(f.titulo)}</h2>
       <p class="contact-line">Contacto 1: <a href="mailto:${escapar(f.email1)}">${escapar(f.email1)}</a></p>
