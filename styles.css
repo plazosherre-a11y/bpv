@@ -184,6 +184,19 @@ body {
   to { background-position: 1920px 0; }
 }
 
+@keyframes deriva-fondo-hero {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 0, 1920px 0; }
+}
+
+.hero {
+  animation: deriva-fondo-hero 90s linear infinite;
+}
+
+body.fondo-estatico .hero {
+  animation: none;
+}
+
 .hero-names {
   animation: aparecer 0.9s 0.35s ease both, flotar 6s ease-in-out 1.4s infinite;
 }
@@ -669,6 +682,7 @@ summary:focus-visible {
 
   .hero-names,
   .hero .btn-primary,
+  .hero,
   body,
   body.fondo-estatico {
     animation: none;
