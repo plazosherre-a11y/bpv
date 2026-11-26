@@ -196,6 +196,14 @@ body {
   animation: deriva-fondo 90s linear infinite;
 }
 
+body.fondo-estatico {
+  animation: none;
+}
+
+main#contenido {
+  background: transparent;
+}
+
 .hero-names {
   font-family: var(--font-display);
   font-weight: 400;
@@ -661,7 +669,8 @@ summary:focus-visible {
 
   .hero-names,
   .hero .btn-primary,
-  body {
+  body,
+  body.fondo-estatico {
     animation: none;
   }
 }

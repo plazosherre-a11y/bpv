@@ -97,6 +97,9 @@
     <p><a href="#inicio">Volver arriba</a> · <a href="panel.html">Panel de edición</a></p>
   </footer>
   <script>
+    if (new URLSearchParams(location.search).get("fondo") === "estatico") {
+      document.body.classList.add("fondo-estatico");
+    }
     const navToggle = document.querySelector(".nav-toggle");
     const navLinks = document.querySelector(".nav-links");
     if (navToggle && navLinks) {
